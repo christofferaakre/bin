@@ -1,0 +1,6 @@
+#!/usr/bin/bash
+FILENAME=$1
+
+
+nasm -felf64 -o $FILENAME.o $FILENAME.asm && ld $FILENAME.o -o $FILENAME &&
+    ./$FILENAME
