@@ -1,0 +1,11 @@
+#!/usr/bin/bash
+# if urxvt terminal is already open, switch to
+# window. Else, open urxvt
+# Make a keyboard shortcut to this bash script
+# for a very convenient terminal experience
+
+if [[ $(xdotool search --onlyvisible --class urxvt)  ]]; then
+    xdotool search --onlyvisible --class urxvt windowactivate
+else
+    urxvt
+fi

@@ -1,4 +1,6 @@
 #!/bin/bash
+# NOTE: not authored by christofferaakre, this file
+# was found on some stackoverflow post, then edited
 
 # NAME: hotplugtv
 # PATH: /home/$USER/bin

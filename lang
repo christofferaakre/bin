@@ -1,0 +1,6 @@
+#!/usr/bin/bash
+# convenience script to simualate or compile programs
+# written in my programming language called lang
+# Usage: lang [<program>] [<simulate> | <compile out_file>]
+
+~/coding/lang/main.py "$@"

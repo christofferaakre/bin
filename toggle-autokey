@@ -1,0 +1,12 @@
+#!/usr/bin/bash
+# If autokey is already open, close it. Else, open it.
+# Closing autokey will disable all hotkeys, phrases,
+# scripts, etc.
+# Make a keyboard shortcut for this script to easily
+# toggle autokey phrases, etc. with a hotkey
+
+if [[ $(xdotool search autokey) ]]; then
+    xdotool search autokey windowkill
+else
+    autokey
+fi

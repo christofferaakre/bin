@@ -1,6 +1,9 @@
 #!/usr/bin/bash
-FILENAME=$1
+# convenience script to compile, link, and run
+# code written in nasm64 assembly in one command
+# Usage: com-nasm [filename_no_extension]
 
+FILENAME=$1
 
 nasm -felf64 -o $FILENAME.o $FILENAME.asm && ld $FILENAME.o -o $FILENAME &&
     ./$FILENAME
