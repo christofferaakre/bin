@@ -1,0 +1,11 @@
+#!/usr/bin/bash
+# if vscode is already open, switch to
+# it. Else, open vscode.
+# Make a keyboard shortcut to this bash script
+# for a very convenient vscode experience
+
+if [[ $(xdotool search --onlyvisible code)  ]]; then
+    xdotool search --onlyvisible code windowactivate
+else
+    code
+fi
