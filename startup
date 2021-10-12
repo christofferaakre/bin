@@ -1,0 +1,6 @@
+#!/usr/bin/bash
+# This script runs some useful things that
+# I want to do on startup. Add this script to start up applications
+
+# Load Xresources
+xrdb -merge ~/bin/dotfiles/.Xresources
