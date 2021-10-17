@@ -14,6 +14,8 @@ Some useful scripts, dotfiles, etc. from my `~/bin`. List that may or may not be
   plugged-unplugged. **this script not authored by me**
 * toggle-autokey - Close autokey if already open, else open it. Closing autokey
   disables all hotkeys, phrases, etc.
+* `trim` - Trims the first argument of spaces and line endings, and copies the
+  modified string to your clipboard
 * `.vimrc`
 * `.Xresourves`
 * `.urxvt`

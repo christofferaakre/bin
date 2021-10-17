@@ -1,0 +1,5 @@
+#!/usr/bin/bash
+# this script trims the first argument of spaces
+# and line endings, then copies that to your clipboard
+
+echo -n $1 | sed 's/[\n\r]+//g' | tr -d " " | xclip -selection clipboard
