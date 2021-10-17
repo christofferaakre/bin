@@ -8,6 +8,7 @@ Some useful scripts, dotfiles, etc. from my `~/bin`. List that may or may not be
 * `terminal` - Hotkey to switch to open terminal if one exists, else open
   a terminal
 * `vscode` - Hotkey to switch to vscode if already open, else open it
+* `yomichan-search` - Hotkey to switch to yomichan serach if already open, else open it
 * `startup` - Runs some useful commands on startup
 * `hotplugtv` - Fix pulseaudio output device when HDMI device
   plugged-unplugged. **this script not authored by me**
