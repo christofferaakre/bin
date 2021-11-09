@@ -1,0 +1,33 @@
+# this script finds the most recent .mkv file in my Videos directory, 
+# and then renames it to whatever i supply as the argument, using ffmpeg
+# to convert it if the file extension i supply is different
+#!/usr/bin/bash
+
+if [ $# -eq 0 ]
+  then
+    echo "Usage: video-convert new-filename, e.g. video-convert my-video.mp4"
+    exit
+fi
+
+FILENAME=$1
+dotmkv=".mkv"
+DIR="/home/negosaki/Videos"
+
+# Get most recent mkv file in ~/Videos
+VIDEO=$(ls -- "$DIR"* | grep .mkv | tail -1)
+
+if [ -z "$VIDEO" ]; then
+  echo "No .mkv file found in $DIR"
+  exit
+fi
+
+
+if [[ "$1" == *"$dotmkv"* ]]; then
+  mv "$DIR"/"$VIDEO" "$DIR"/"$1"
+  echo "Renamed $DIR/$VIDEO to $DIR/$1."
+else
+  echo "ffmpeg -hide_banner -loglevel error -i $DIR/$VIDEO $DIR/$1 -codec copy"
+  ffmpeg -hide_banner -loglevel error -i "$DIR"/"$VIDEO" $DIR/"$1" -codec copy
+  echo "Converted $DIR/$VIDEO to $DIR/$1."
+fi
+exit
