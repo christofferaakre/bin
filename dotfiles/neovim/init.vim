@@ -16,8 +16,7 @@ Plug 'tpope/vim-surround'
 Plug 'airblade/vim-gitgutter'
 Plug 'itchyny/lightline.vim'
 Plug 'itchyny/vim-gitbranch'
-
-
+Plug 'preservim/nerdtree'
 call plug#end()
 
 let mapleader = " "
