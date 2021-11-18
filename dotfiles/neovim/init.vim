@@ -17,6 +17,9 @@ Plug 'airblade/vim-gitgutter'
 Plug 'itchyny/lightline.vim'
 Plug 'itchyny/vim-gitbranch'
 Plug 'preservim/nerdtree'
+Plug 'mattn/emmet-vim'
+Plug 'ThePrimeagen/harpoon'
+Plug 'ThePrimeagen/refactoring.nvim'
 call plug#end()
 
 let mapleader = " "
@@ -42,7 +45,7 @@ endfun
 augroup negosaki
         autocmd!
         autocmd BufWritePre * :call TrimWhitespace()
-        autocmd FileType c,cpp,java,scala let b:comment_leader = '//'
+        autocmd FileType c,cpp,java,scala,javascript,javascriptreact,typescript,typescriptreact let b:comment_leader = '//'
         autocmd FileType sh,ruby,python   let b:comment_leader = '#'
         autocmd FileType conf,fstab       let b:comment_leader = '#'
         autocmd FileType tex              let b:comment_leader = '%'

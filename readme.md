@@ -19,6 +19,7 @@ Some useful scripts, dotfiles, etc. from my `~/bin`. List that may or may not be
   disables all hotkeys, phrases, etc.
 * `trim` - Trims the first argument of spaces and line endings, and copies the
   modified string to your clipboard
+* `wordcount` - Does a word count on the given `.tex` file
 * `.vimrc`
 * `.Xresourves`
 * `.urxvt`
