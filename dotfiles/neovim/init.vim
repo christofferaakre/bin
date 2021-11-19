@@ -20,6 +20,7 @@ Plug 'preservim/nerdtree'
 Plug 'mattn/emmet-vim'
 Plug 'ThePrimeagen/harpoon'
 Plug 'ThePrimeagen/refactoring.nvim'
+Plug 'tpope/vim-fugitive'
 call plug#end()
 
 let mapleader = " "
