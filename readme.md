@@ -18,6 +18,9 @@ Some useful scripts, dotfiles, etc. from my `~/bin`. List that may or may not be
   plugged-unplugged. **this script not authored by me**
 * toggle-autokey - Close autokey if already open, else open it. Closing autokey
   disables all hotkeys, phrases, etc.
+* `rename-subs` - Python script that renames subtitles to match
+video files. Downloaded and adapted from https://github.com/Eshaan7/RenameThemSubs
+under the MIT license
 * `trim` - Trims the first argument of spaces and line endings, and copies the
   modified string to your clipboard
 * `wordcount` - Does a word count on the given `.tex` file
