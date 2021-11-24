@@ -1,0 +1,56 @@
+#!/usr/bin/env bash
+# Author: negosaki
+# with the option "pause", it pauses mpv
+# and brings up yomichan search
+# with the optoin "play", it minimizes yomichan search
+# and resumes playing mpv
+# Requires yomichan search to be set up as a chrome app
+
+function yomichan_on () {
+    if [[ $(xdotool search yomichan)  ]]; then
+        xdotool search yomichan windowactivate
+    else
+        /opt/google/chrome/google-chrome --profile-directory=Default --app-id=dmlhnpobnomcmidkoijomppdlpfkedmi
+    fi
+}
+
+function yomichan_off() {
+    xdotool search yomichan windowminimize
+}
+
+function toggle_pause_mpv () {
+    xdotool key --window "$(xdotool search --class mpv)" p
+}
+
+function pause() {
+    toggle_pause_mpv
+    yomichan_on
+    exit 0
+}
+
+function play() {
+    yomichan_off
+    toggle_pause_mpv
+    exit 0
+}
+
+function usage() {
+    echo "Usage: mpv-yomichan [play | pause]"
+}
+
+if [[ "$#" -eq 0 ]];then
+        echo "No arguments specified."
+        usage
+        exit 1
+fi
+
+if [[ "$1" == "pause" ]];then
+        pause
+
+elif [[ "$1" == "play" ]];then
+        play
+
+else
+    usage
+    exit 1
+fi

@@ -9,6 +9,8 @@ Some useful scripts, dotfiles, etc. from my `~/bin`. List that may or may not be
   a terminal
 * `vscode` - Hotkey to switch to vscode if already open, else open it
 * `yomichan-search` - Hotkey to switch to yomichan serach if already open, else open it
+* `mpv-yomichan` - Easily pause mpv and bring up yomichan search,
+or minimize it and resume playing mpv
 * `video-convert` - Easily rename/convert the most recent `.mkv` file in the
   `~/Videos` directory. Useful for programs that save video with
   `video-delete` - Easily delete the most recent `.mkv` file in `~/Videos`
