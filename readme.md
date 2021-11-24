@@ -11,6 +11,7 @@ Some useful scripts, dotfiles, etc. from my `~/bin`. List that may or may not be
 * `yomichan-search` - Hotkey to switch to yomichan serach if already open, else open it
 * `video-convert` - Easily rename/convert the most recent `.mkv` file in the
   `~/Videos` directory. Useful for programs that save video with
+  `video-delete` - Easily delete the most recent `.mkv` file in `~/Videos`
 `yy:mm:dd:hh:mm:ss` filename formats for example.
 * `startup` - Runs some useful commands on startup
 * `hotplugtv` - Fix pulseaudio output device when HDMI device

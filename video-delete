@@ -1,0 +1,18 @@
+# this script finds the most recent .mkv file in my Videos directory,
+# and then deletes it
+# #!/usr/bin/bash
+
+dotmkv=".mkv"
+DIR="/home/negosaki/Videos"
+
+# Get most recent mkv file in ~/Videos
+VIDEO=$(ls -- "$DIR"* | grep .mkv | tail -1)
+
+if [ -z "$VIDEO" ]; then
+  echo "No .mkv file found in $DIR"
+  exit
+fi
+
+rm "$DIR"/"$VIDEO"
+echo "Deleted $DIR/$VIDEO"
+exit
