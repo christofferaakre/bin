@@ -5,6 +5,9 @@
 # with the optionn "play", it minimizes yomichan search
 # and resumes playing mpv
 # Requires yomichan search to be set up as a chrome app
+# Note, by default, the script will not interact with mpv,
+# but if you give it "toggle-mpv" as the second argument,
+#it will
 
 function yomichan_on () {
     if [[ $(xdotool search yomichan)  ]]; then
@@ -19,8 +22,9 @@ function yomichan_off() {
 }
 
 function toggle_pause_mpv () {
-    xdotool key --window "$(xdotool search --class mpv)" p
-
+    if [[ "$2" -eq "toggle-mpv" ]];then
+        xdotool key --window "$(xdotool search --class mpv)" p
+    fi
 }
 
 function pause() {
@@ -50,7 +54,6 @@ if [[ "$1" == "pause" ]];then
 
 elif [[ "$1" == "play" ]];then
         play
-
 else
     usage
     exit 1
