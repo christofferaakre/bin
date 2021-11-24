@@ -2,7 +2,7 @@
 # Author: negosaki
 # with the option "pause", it pauses mpv
 # and brings up yomichan search
-# with the optoin "play", it minimizes yomichan search
+# with the optionn "play", it minimizes yomichan search
 # and resumes playing mpv
 # Requires yomichan search to be set up as a chrome app
 
@@ -20,6 +20,7 @@ function yomichan_off() {
 
 function toggle_pause_mpv () {
     xdotool key --window "$(xdotool search --class mpv)" p
+
 }
 
 function pause() {
