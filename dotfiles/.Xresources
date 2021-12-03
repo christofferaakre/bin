@@ -27,7 +27,7 @@ URxvt.cursorBlink:	true
 URxvt.cursorUnderline:	false
 URxvt.depth:	24
 URxvt.font:	xft:bitstream vera sans mono:size=16:antialias=true
-URxvt.geometry:	70x39-0+0
+URxvt.geometry:	99x26
 URxvt.internalBorder:	24
 URxvt.iso14755:	false
 URxvt.keysym.Control-Down:	command:\033]721;1\007
@@ -43,7 +43,7 @@ URxvt.keysym.Shift-Down:	\033[1;5B
 URxvt.keysym.Shift-Up:	\033[1;5A
 URxvt.lineSpace:	0
 URxvt.pasteCommand:	xclip -o -selection clipboard
-URxvt.perl-ext-common:	default,clipboard,url-select,keyboard-select,matcher,tabbed
+URxvt.perl-ext-common:	default,clipboard,url-select,keyboard-select,matcher
 URxvt.saveline:	2048
 URxvt.scrollBar:	false
 URxvt.scrollBar_right:	false
@@ -67,6 +67,8 @@ Xft.hintstyle:	hintslight
 Xft.rgba:	rgb
 Xcursor.size:	24
 Xcursor.theme:	Yaru
+
+
 
 !urxvt*depth: 32
 !urxvt*background: rgba:0000/0000/0200/c800

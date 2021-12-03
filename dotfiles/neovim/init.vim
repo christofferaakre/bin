@@ -68,3 +68,5 @@ function! CommentToggle()
         endfunction
 
 map <F7> :call CommentToggle()<CR>
+
+set clipboard+=unnamedplus
