@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+# This script defines a function to create
+# boilerplate code for a python package.
+# Source this script in your .bashrc
+
+function python_boilerplate() {
+    echo "python-boilerplate"
+    echo "Author: Christoffer Aakre"
+    echo "Github: https://github.com/christofferaakre"
+    if [ -z "$1" ]
+        then
+            echo "Usage: python_boilerplate package_name"
+            return 1
+    fi
+
+    set -x
+    git clone https://github.com/christofferaakre/example-package $1
+    cd $1
+    rm -rf .git
+    set +x
+    echo "Done!"
+}
