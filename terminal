@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 # if urxvt terminal is already open, switch to
 # window. Else, open urxvt
 # Make a keyboard shortcut to this bash script
