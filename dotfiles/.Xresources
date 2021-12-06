@@ -43,23 +43,16 @@ URxvt.keysym.Shift-Down:	\033[1;5B
 URxvt.keysym.Shift-Up:	\033[1;5A
 URxvt.lineSpace:	0
 URxvt.pasteCommand:	xclip -o -selection clipboard
-URxvt.perl-ext-common:	default,clipboard,url-select,keyboard-select,matcher
+URxvt.perl-ext-common:	default,matcher
 URxvt.saveline:	2048
 URxvt.scrollBar:	false
 URxvt.scrollBar_right:	false
-URxvt.tabbed.active-fg:	1
-URxvt.tabbed.actived-fg:	4
-URxvt.tabbed.actives-fg:	5
-URxvt.tabbed.new-button:	false
-URxvt.tabbed.tab-bg:	0
-URxvt.tabbed.tab-fg:	8
-URxvt.tabbed.tab-numbers:	false
-URxvt.tabbed.tabbar-bg:	3
-URxvt.tabbed.tabbar-fg:	15
 URxvt.underlineURLs:	true
 URxvt.urgentOnBell:	true
 URxvt.urlButton:	1
 URxvt.urlLauncher:	google-chrome
+URxvt.matcher.button: 1
+URxvt.matcher.pattern.1: \\bwww\\.[\\w-]+\\.[\\w./?&@#-]*[\\w/-]
 Xft.dpi:	96
 Xft.antialias:	1
 Xft.hinting:	1
