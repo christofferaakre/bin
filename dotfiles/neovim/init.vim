@@ -21,6 +21,11 @@ Plug 'mattn/emmet-vim'
 Plug 'ThePrimeagen/harpoon'
 Plug 'ThePrimeagen/refactoring.nvim'
 Plug 'tpope/vim-fugitive'
+Plug 'mxw/vim-jsx'
+Plug 'pangloss/vim-javascript'
+Plug 'dikiaap/minimalist'
+Plug 'NLKNguyen/papercolor-theme'
+Plug 'sainnhe/gruvbox-material'
 call plug#end()
 
 let mapleader = " "

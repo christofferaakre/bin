@@ -80,8 +80,8 @@ def rename_files(path, vidFiles, subFiles, sub_format):
 			print("{0} renamed to {1} ".format(subFiles[i], os.path.splitext(vname)[0]))
 			os.rename(subFiles[i], os.path.splitext(vname)[0]+sub_format)
 	except AssertionError:
-		print(len(subFiles))
-		print(len(vidFiles))
+		print('Number of subtitle files' + str(len(subFiles)))
+		print('Number of video files' + str(len(vidFiles)))
 	#print("\nPress Q to Quit")
 	#msvcrt.getch()
 	return
