@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+function usage() {
+    echo "Usage: hex-to-dec <hex-number>"
+}
+
+if [[ "$#" -eq 0 ]];then
+        echo "No arguments specified."
+        usage
+        exit 1
+fi
+
+HEX=$1
+
+echo "$(($HEX))"
+exit 0

@@ -26,6 +26,8 @@ Plug 'pangloss/vim-javascript'
 Plug 'dikiaap/minimalist'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'sainnhe/gruvbox-material'
+Plug 'SirVer/ultisnips'
+Plug 'mlaursen/vim-react-snippets'
 call plug#end()
 
 let mapleader = " "
@@ -65,6 +67,10 @@ augroup negosaki
         " handle nasm syntax in .asm files
         au BufRead,BufNewFile *.asm set filetype=nasm
                autocmd FileType asm              let b:comment_leader = ';'
+
+        au BufRead,BufNewFile *.lang set filetype=lang
+               autocmd FileType lang              let b:comment_leader = '#'
+
         augroup END
 
 function! CommentToggle()

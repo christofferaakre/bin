@@ -4,7 +4,7 @@ let g:gruvbox_contrast_dark='hard'
 set t_8f=\[[38;2;%lu;%lu;%lum
 set t_8b=\[[48;2;%lu;%lu;%lum
 set termguicolors
-colorscheme PaperColor
+colorscheme gruvbox
 
 highlight Normal guibg=None
 highlight Normal ctermbg=NONE guibg=NONE
