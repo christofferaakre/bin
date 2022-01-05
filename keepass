@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+if [[ $(xdotool search --onlyvisible keepassxc)  ]]; then
+    xdotool search --onlyvisible keepassxc windowactivate
+else
+    keepassxc
+fi
