@@ -10,12 +10,21 @@ function usage() {
     echo "Usage: flameshot-ocr [language]"
 }
 
-
 if [[ "$#" -eq 0 ]];then
         echo "No arguments specified."
         usage
         exit 1
 fi
+
+function ocr() {
+
+filename=$1
+lang=$2
+outfile="/tmp/tesseract-output"
+
+tesseract "$1" $outfile -l "$2"
+cat "$outfile".txt
+}
 
 save_path="/tmp/flameshot-screenshot.png"
 lang=$1
@@ -23,6 +32,6 @@ lang=$1
 flameshot gui -r > "$save_path"
 output=$(ocr "$save_path" "$lang")
 echo "$output"
-yomichan-search
-
+echo "$output" | /usr/bin/xclip -selection clipboard
+/home/negosaki/bin/yomichan-search
 exit 0
