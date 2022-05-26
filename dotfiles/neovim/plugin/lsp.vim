@@ -83,9 +83,17 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 end
 
+cmp.setup {
+  mapping = cmp.mapping.preset.insert({
+        ["<C-p>"] = cmp.mapping.select_prev_item(),
+        ["<C-n>"] = cmp.mapping.select_next_item(),
+  })
+}
+
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'pyright', 'tsserver', 'clangd' }
+
+local servers = { 'pyright', 'tsserver', 'clangd', 'gdscript', 'rust_analyzer'}
 for _, lsp in ipairs(servers) do
  require'lspconfig'[lsp].setup {
     on_attach = on_attach,
@@ -95,9 +103,20 @@ for _, lsp in ipairs(servers) do
   }
 end
 
+-- Set up omnisharp
 
+local nvim_lsp = require'lspconfig'
+
+local pid = vim.fn.getpid()
+-- On linux/darwin if using a release build, otherwise under scripts/OmniSharp(.Core)(.cmd)
+local omnisharp_bin = "/home/negosaki/software/omnisharp-linux/run"
+
+require'lspconfig'.omnisharp.setup{
+    cmd = { omnisharp_bin, "--languageserver" , "--hostPID", tostring(pid) };
+    root_dir = nvim_lsp.util.root_pattern("*.csproj","*.sln");
+    ...
+}
 
 EOF
-
 
 

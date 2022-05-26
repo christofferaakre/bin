@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+usage() {
+    echo "Usage: audioshare <headphones|earphones|reset>"
+}
+
+if [ "$#" -ne 1 ]; then
+    usage
+    exit 1
+fi
+
+devices_location="/home/negosaki/sound"
+
+audioshare="/home/negosaki/coding/audioshare/audioshare"
+
+if [ "$1" = "reset" ]; then
+    $audioshare reset
+    exit 0
+elif [ "$1" = "headphones" ]; then
+    devices_dir="$devices_location/headphones"
+    echo "Audio sharing through headphones"
+elif [ "$1" = "earphones" ]; then
+    devices_dir="$devices_location/earphones"
+    echo "Audi sharing through earphones"
+else
+    usage
+    exit 2
+fi
+
+input_device=$(cat "$devices_dir/input")
+output_device=$(cat "$devices_dir/output")
+$audioshare $input_device $output_device
+
+exit 0

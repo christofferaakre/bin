@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# Change resolution of given display
+
+function usage() {
+    echo "Usage: resolution [display_name] [resolution]"
+    echo "For example: resolution HDMI-0 1920x1080"
+}
+
+if (( $# < 2 )); then
+    usage
+    exit 1
+fi
+
+display=$1
+resolution=$2
+echo "Changing resolution of display $1 to $2"
+xrandr --output "$1" --mode "$2"
+exit 0

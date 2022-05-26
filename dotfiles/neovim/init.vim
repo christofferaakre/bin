@@ -1,3 +1,5 @@
+let g:python3_host_prog = $HOME . '/.local/venv/nvim/bin/python'
+
 call plug#begin('~/.vim/plugged')
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate' }
 Plug 'nvim-lua/plenary.nvim'
@@ -28,6 +30,15 @@ Plug 'NLKNguyen/papercolor-theme'
 Plug 'sainnhe/gruvbox-material'
 Plug 'SirVer/ultisnips'
 Plug 'mlaursen/vim-react-snippets'
+Plug 'lervag/vimtex'
+Plug 'akinsho/toggleterm.nvim'
+Plug 'unblevable/quick-scope'
+Plug 'justinmk/vim-sneak'
+Plug 'calviken/vim-gdscript3'
+Plug 'averms/black-nvim', {'do': ':UpdateRemotePlugins'}
+Plug 'neovim/nvim-lspconfig'
+Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
+Plug 'rust-lang/rust.vim'
 call plug#end()
 
 let mapleader = " "
@@ -44,6 +55,9 @@ nnoremap <ESC> :nohlsearch<CR><ESC>
 " save on Ctrl+s
 nnoremap <C-S> :w<CR>
 
+" save and quit on Ctrl+space
+nnoremap <C-space> :wq<CR>
+
 fun! TrimWhitespace()
     let l:save = winsaveview()
     keeppatterns %s/\s\+$//e
@@ -54,6 +68,7 @@ augroup negosaki
         autocmd!
         autocmd BufWritePre * :call TrimWhitespace()
         autocmd FileType c,cpp,java,scala,javascript,javascriptreact,typescript,typescriptreact let b:comment_leader = '//'
+        autocmd FileType rust let b:comment_leader = '//'
         autocmd FileType sh,ruby,python   let b:comment_leader = '#'
         autocmd FileType conf,fstab       let b:comment_leader = '#'
         autocmd FileType tex              let b:comment_leader = '%'
@@ -71,6 +86,8 @@ augroup negosaki
         au BufRead,BufNewFile *.lang set filetype=lang
                autocmd FileType lang              let b:comment_leader = '#'
 
+        autocmd BufWritePre *.py :call Black()
+
         augroup END
 
 function! CommentToggle()
@@ -81,3 +98,27 @@ function! CommentToggle()
 map <F7> :call CommentToggle()<CR>
 
 set clipboard+=unnamedplus
+
+" enable mouse integration
+set mouse=a
+
+
+augroup qs_colors
+  autocmd!
+  autocmd ColorScheme * highlight QuickScopePrimary guifg='#5fffff' gui=underline ctermfg=155 cterm=underline
+  autocmd ColorScheme * highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=underline
+augroup END
+
+map s <Plug>Sneak_s
+map S <Plug>Sneak_S
+
+
+map gS <Plug>Sneak_,
+map gs <Plug>Sneak_;
+
+xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
+
+function! ExecuteMacroOverVisualRange()
+  echo "@".getcmdline()
+  execute ":'<,'>normal @".nr2char(getchar())
+endfunction

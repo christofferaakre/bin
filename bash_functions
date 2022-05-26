@@ -1,4 +1,8 @@
-#!/usr/bin/env bash
+#!/usr/bin/env bash -x
+
+function path() {
+    echo -e ${PATH//:/\\n}
+}
 
 function show_large_dpkg() {
 # Show the largest installed dpkg packages
@@ -6,9 +10,10 @@ dpkg-query --show --showformat='${Package;-50}\t${Installed-Size}\n' | sort -k 2
 }
 
 function clean {
+    set -x
     #Taken from https://askubuntu.com/a/1161181
     # Show free space
-    df -Th | grep -v fs
+    sudo df -Th | grep -v fs
     # Will need English output for processing
     LANG=en_GB.UTF-8
 
@@ -19,7 +24,7 @@ function clean {
     sudo apt-get clean
 
     ## Remove old versions of snap packages
-    snap list --all | while read snapname ver rev trk pub notes; do
+    sudo snap list --all | while read snapname ver rev trk pub notes; do
         if [[ $notes = *disabled* ]]; then
             sudo snap remove "$snapname" --revision="$rev"
         fi
@@ -41,6 +46,8 @@ function clean {
     sudo journalctl --rotate
     sudo journalctl --vacuum-time=1s
 
+    sudo df -Th | grep -v fs
+    set +x
 }
 
 function partition_space() {
@@ -55,3 +62,13 @@ function copy() {
 function paste () {
     xclip -o
 }
+
+function penv () {
+    source $(poetry env info --path)/bin/activate
+}
+
+# Add this to .bashrc or .zshrc or its equivalent
+transfer(){ if [ $# -eq 0 ];then printf "No arguments specified.\nUsage:\n transfer <file|directory>\n ... | transfer <file_name>\n">&2;return 1;fi;if tty -s;then file="$1";file_name=$(basename "$file");if [ ! -e "$file" ];then printf "$file: No such file or directory\n">&2;return 1;fi;if [ -d "$file" ];then file_name="$file_name.zip" ,;(cd "$file"&&zip -r -q - .)|curl --progress-bar --upload-file "-" "https://transfer.sh/$file_name"|tee /dev/null,;else cat "$file"|curl --progress-bar --upload-file "-" "https://transfer.sh/$file_name"|tee /dev/null;fi;else file_name=$1;curl --progress-bar --upload-file "-" "https://transfer.sh/$file_name"|tee /dev/null;fi;}
+
+
+

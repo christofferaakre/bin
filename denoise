@@ -1,0 +1,66 @@
+#!/usr/bin/env bash
+
+if [ -z "$2" ];then
+  echo 'USAGE:
+    denoise input.mov output.mov
+OR
+    denoise input.mov output.mov [ambient-noise-start-time] [ambient-noise-duration] [sox-noisered-amount] [sox-norm-param]
+E.G, EXPLICIT DEFAULTS
+    denoise input.mov output.mov 00:00:00  00:00:00.3 0.2 -1
+PROCESS ALL VIDEOS IN DIRECTORY:
+    for f in `find . -type f | grep -iE "\.mov$|\.mp4$"`;do denoise "${f%.*}"{,-rn}."${f##*.}";done
+'
+  exit 0
+fi
+
+INPUT="$1"
+OUTPUT="$2"
+
+if [ $# -ge 3 ]
+then
+  SS="$3"
+else
+  SS="00:00:00"
+fi
+
+if [ $# -ge 4 ]
+then
+  T="$4"
+else
+  T="00:00:00.3"
+fi
+
+if [ $# -ge 5 ]
+then
+  NR="$5"
+else
+  NR="0.2"
+fi
+
+if [ $# -ge 6 ]
+then
+  N="$6"
+else
+  N="-1"
+fi
+
+# auxiliary files
+TMP_NOISE_WAV="noise.wav"
+TMP_NOISE_PRO="noise_profile_file"
+TMP_INPUT="input_audio.wav"
+TMP_OUTPUT="output_audio.wav"
+
+# https://unix.stackexchange.com/a/427343/238156
+
+# assume first 0.3 secs are noise
+ffmpeg -i "$INPUT" -ss "$SS" -t "$T" "$TMP_NOISE_WAV"
+sox "$TMP_NOISE_WAV" -n noiseprof "$TMP_NOISE_PRO"
+ffmpeg -i "$INPUT" "$TMP_INPUT"
+# remove noise (0.2-0.3 works well) and normalize (-1 to avoid clipping)
+sox "$TMP_INPUT" "$TMP_OUTPUT" noisered "$TMP_NOISE_PRO" "$NR" norm "$N"
+ffmpeg -i "$INPUT" -i "$TMP_OUTPUT" -c:v copy -map 0:v:0 -map 1:a:0 "$OUTPUT"
+# clean up auxiliary files
+rm "$TMP_NOISE_WAV"
+rm "$TMP_NOISE_PRO"
+rm "$TMP_INPUT"
+rm "$TMP_OUTPUT"

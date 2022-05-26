@@ -1,0 +1,2 @@
+#!/bin/bash
+/home/negosaki/.local/bin/nvr --servername unity $@

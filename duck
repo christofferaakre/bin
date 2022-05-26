@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+lynx "duckduckgo.com/lite?q=$*"
