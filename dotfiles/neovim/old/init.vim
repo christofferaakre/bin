@@ -39,6 +39,10 @@ Plug 'averms/black-nvim', {'do': ':UpdateRemotePlugins'}
 Plug 'neovim/nvim-lspconfig'
 Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 Plug 'rust-lang/rust.vim'
+Plug 'OmniSharp/omnisharp-vim'
+Plug 'tikhomirov/vim-glsl'
+Plug 'nickeb96/fish.vim'
+Plug 'numToStr/Comment.nvim'
 call plug#end()
 
 let mapleader = " "
@@ -82,6 +86,14 @@ augroup negosaki
         " handle nasm syntax in .asm files
         au BufRead,BufNewFile *.asm set filetype=nasm
                autocmd FileType asm              let b:comment_leader = ';'
+
+        " handle nasm syntax in .inc files
+        au BufRead,BufNewFile *.inc set filetype=nasm
+               autocmd FileType nasm              let b:comment_leader = ';'
+
+        " handle glsl syntax in .vs files
+        au BufRead,BufNewFile *.vs,*.fs set filetype=glsl
+               autocmd FileType glsl             let b:comment_leader  = '//'
 
         au BufRead,BufNewFile *.lang set filetype=lang
                autocmd FileType lang              let b:comment_leader = '#'

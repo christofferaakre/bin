@@ -17,6 +17,10 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 -- awesome widgets
 local volume_widget = require('awesome-wm-widgets.volume-widget.volume')
 
+local brightness_widget = require('brightness-widget')
+local brightness = brightness_widget:new({})
+
+
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
@@ -48,7 +52,7 @@ end
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
-beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
+beautiful.init("~/.local/share/awesome/themes/negosaki/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "alacritty"
@@ -64,19 +68,19 @@ modkey = "Mod4"
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
-    awful.layout.suit.floating,
     awful.layout.suit.tile,
     awful.layout.suit.tile.left,
-    awful.layout.suit.tile.bottom,
-    awful.layout.suit.tile.top,
+    awful.layout.suit.floating,
     awful.layout.suit.fair,
-    awful.layout.suit.fair.horizontal,
     awful.layout.suit.spiral,
-    awful.layout.suit.spiral.dwindle,
-    awful.layout.suit.max,
-    awful.layout.suit.max.fullscreen,
-    awful.layout.suit.magnifier,
-    awful.layout.suit.corner.nw,
+    --awful.layout.suit.tile.bottom,
+    --awful.layout.suit.tile.top,
+    --awful.layout.suit.fair.horizontal,
+    --awful.layout.suit.spiral.dwindle,
+    --awful.layout.suit.max,
+    --awful.layout.suit.max.fullscreen,
+    --awful.layout.suit.magnifier,
+    --awful.layout.suit.corner.nw,
     -- awful.layout.suit.corner.ne,
     -- awful.layout.suit.corner.sw,
     -- awful.layout.suit.corner.se,
@@ -214,9 +218,12 @@ awful.screen.connect_for_each_screen(function(s)
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             volume_widget{
+                device = 'default',
                 widget_type = 'icon_and_text'
             },
+            brightness.widget,
             mykeyboardlayout,
+            require("battery-widget") {},
             wibox.widget.systray(),
             mytextclock,
             s.mylayoutbox,
@@ -234,15 +241,20 @@ root.buttons(gears.table.join(
 -- }}}
 
 -- {{{ Key bindings
-
-
-
 globalkeys = gears.table.join(
+
+    -- arch wiki search
+    awful.key({modkey }, "w", function() awful.spawn("dm-wiki") end,
+    {description="Search the Arch Wiki", group="launcher"}),
 
     -- volume control
     awful.key({ modkey }, "]", function() volume_widget:inc(5) end),
     awful.key({ modkey }, "[", function() volume_widget:dec(5) end),
     awful.key({ modkey }, "#", function() volume_widget:toggle() end),
+
+    -- Brightness control
+    awful.key({modkey, "Shift"}, "[", function() brightness:down() end),
+    awful.key({modkey, "Shift"}, "]", function() brightness:up() end),
 
     awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
               {description="show help", group="awesome"}),
@@ -265,8 +277,6 @@ globalkeys = gears.table.join(
         end,
         {description = "focus previous by index", group = "client"}
     ),
-    awful.key({ modkey,           }, "w", function () mymainmenu:show() end,
-              {description = "show main menu", group = "awesome"}),
 
     -- Layout manipulation
     awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end,
@@ -494,12 +504,15 @@ awful.rules.rules = {
           "Tor Browser", -- Needs a fixed window size to avoid fingerprinting by screen size.
           "Wpa_gui",
           "veromix",
-          "xtightvncviewer"},
+          "xtightvncviewer",
+      },
 
         -- Note that the name property shown in xprop might be set slightly after creation of the client
         -- and the name shown there might not match defined rules here.
         name = {
           "Event Tester",  -- xev.
+          "Hello world",
+          "glutin",
         },
         role = {
           "AlarmWindow",  -- Thunderbird's calendar.
@@ -516,6 +529,8 @@ awful.rules.rules = {
     -- Set Firefox to always map on the tag named "2" on screen 1.
     -- { rule = { class = "Firefox" },
     --   properties = { screen = 1, tag = "2" } },
+    -- Program specific rules
+
 }
 -- }}}
 
@@ -586,4 +601,3 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 awful.spawn.with_shell("~/.config/awesome/autorun.sh")
 
 beautiful.useless_gap = 5
-
